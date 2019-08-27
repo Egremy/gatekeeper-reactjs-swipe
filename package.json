@@ -1,0 +1,99 @@
+{
+    "name": "gatekeeper-reactjs-swipe",
+    "version": "1.0.0",
+    "description": "This is a ReactJS Test Project to create a swiper frame component.",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack",
+        "lint": "eslint --ext .jsx,.js src",
+        "dev": "webpack-dev-server",
+        "test": "echo \"Error: no test specified\""
+    },
+    "husky": {
+        "hooks": {
+            "post-merge": "npm install",
+            "post-rewrite": "npm install",
+            "pre-commit": "npm run lint",
+            "pre-push": "npm run test"
+        }
+    },
+    "keywords": [],
+    "author": "jesuskata",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/core": "7.5.5",
+        "@babel/preset-env": "7.5.5",
+        "@babel/preset-react": "7.0.0",
+        "babel-eslint": "10.0.2",
+        "babel-loader": "8.0.6",
+        "babel-preset-airbnb": "4.0.1",
+        "eslint": "6.2.1",
+        "eslint-config-airbnb": "18.0.1",
+        "eslint-plugin-import": "2.18.2",
+        "eslint-plugin-jsx-a11y": "6.2.3",
+        "eslint-plugin-react": "7.14.3",
+        "file-loader": "4.2.0",
+        "html-webpack-plugin": "3.2.0",
+        "husky": "3.0.4",
+        "image-webpack-loader": "5.0.0",
+        "webpack": "4.39.2",
+        "webpack-cli": "3.3.7",
+        "webpack-dev-server": "3.8.0"
+    },
+    "dependencies": {
+        "@material-ui/core": "4.3.3",
+        "@material-ui/icons": "4.2.1",
+        "prop-types": "15.7.2",
+        "react": "16.9.0",
+        "react-dom": "16.9.0",
+        "styled-components": "4.3.2"
+    },
+    "eslintConfig": {
+        "parser": "babel-eslint",
+        "env": {
+            "browser": true,
+            "es6": true
+        },
+        "extends": [
+            "airbnb"
+        ],
+        "globals": {
+            "Atomics": "readonly",
+            "SharedArrayBuffer": "readonly",
+            "document": "writable"
+        },
+        "parserOptions": {
+            "ecmaFeatures": {
+                "jsx": true
+            },
+            "ecmaVersion": 2018,
+            "sourceType": "module"
+        },
+        "plugins": [
+            "react"
+        ],
+        "rules": {
+            "no-nested-ternary": "off",
+            "arrow-parens": "off",
+            "comma-dangle": "off",
+            "function-paren-newline": "off",
+            "import/no-extraneous-dependencies": "off",
+            "import/prefer-default-export": "off",
+            "max-len": [
+                1,
+                120
+            ],
+            "no-param-reassign": "off",
+            "no-unused-vars": [
+                2,
+                {
+                    "args": "none"
+                }
+            ],
+            "no-use-before-define": "off",
+            "react/destructuring-assignment": "off",
+            "react/require-default-props": "off",
+            "react/jsx-filename-extension": "off"
+        }
+    }
+}
