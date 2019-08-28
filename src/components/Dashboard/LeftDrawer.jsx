@@ -14,7 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { iconToShow } from './utils';
 
 // Constants
-import { gatekeeperDrawerOptions } from './constants';
+import { GATEKEEPER_DRAWER_OPTIONS } from './constants';
 
 export const LeftDrawer = ({ classes, open }) => (
   <Drawer
@@ -32,7 +32,7 @@ export const LeftDrawer = ({ classes, open }) => (
     open={open}
   >
     <List>
-      {gatekeeperDrawerOptions.map((text, index) => (
+      {GATEKEEPER_DRAWER_OPTIONS.map((text, index) => (
         <ListItem
           button
           key={text}

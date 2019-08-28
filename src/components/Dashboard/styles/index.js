@@ -1,6 +1,18 @@
 // Material-UI Core
 import { makeStyles } from '@material-ui/core/styles';
 
+// Constants
+import { COLOR_STYLE_GUIDE } from '../constants';
+
+const {
+  CORAL_PINK,
+  DARK_BLUE_GRAY,
+  LIGHT_GRAY,
+  LIGHT_PINK,
+  SLATE_TWO,
+  WARM_GRAY
+} = COLOR_STYLE_GUIDE;
+
 const drawerWidth = 320;
 
 export const useStyles = makeStyles(theme => ({
@@ -9,26 +21,26 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 60
   },
   appBar: {
-    backgroundColor: '#f3f3ef',
+    backgroundColor: LIGHT_GRAY,
     zIndex: theme.zIndex.drawer + 1
   },
   appBarShift: {
   },
   menuButton: {
     marginRight: 8,
-    backgroundColor: '#454D66',
+    backgroundColor: DARK_BLUE_GRAY,
     '&:hover': {
-      backgroundColor: '#7c8293'
+      backgroundColor: SLATE_TWO
     },
-    color: '#f3f3ef'
+    color: LIGHT_GRAY
   },
   menuCloseButton: {
     marginRight: 8,
-    backgroundColor: '#EF6C6C',
+    backgroundColor: CORAL_PINK,
     '&:hover': {
-      backgroundColor: '#f39898'
+      backgroundColor: LIGHT_PINK
     },
-    color: 'white'
+    color: LIGHT_GRAY
   },
   hide: {
     display: 'none',
@@ -39,8 +51,8 @@ export const useStyles = makeStyles(theme => ({
     whiteSpace: 'nowrap'
   },
   drawerOpen: {
-    backgroundColor: '#9E9E9E',
-    color: 'white',
+    backgroundColor: WARM_GRAY,
+    color: LIGHT_GRAY,
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
@@ -49,8 +61,8 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 58
   },
   drawerClose: {
-    backgroundColor: '#9E9E9E',
-    color: 'white',
+    backgroundColor: WARM_GRAY,
+    color: LIGHT_GRAY,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -69,16 +81,16 @@ export const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3)
   },
   iconAlertBackground: {
-    backgroundColor: '#454D66',
+    backgroundColor: DARK_BLUE_GRAY,
     '&:hover': {
-      backgroundColor: '#7c8293'
+      backgroundColor: SLATE_TWO
     }
   },
   iconAlertColor: {
-    color: '#EF6C6C'
+    color: CORAL_PINK
   },
   iconBasicColor: {
-    color: '#454D66'
+    color: DARK_BLUE_GRAY
   },
   listTextFont: {
     fontWeight: 500
