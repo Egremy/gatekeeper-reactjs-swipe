@@ -43,7 +43,7 @@ export const LeftDrawer = ({ classes, open }) => (
           >
             {iconToShow(text)}
           </ListItemIcon>
-          <ListItemText primary={text} />
+          <ListItemText classes={{ primary: classes.listTextFont }} primary={text} />
         </ListItem>
       ))}
     </List>

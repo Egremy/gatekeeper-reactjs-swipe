@@ -13,7 +13,8 @@ import { Dashboard } from './components/Dashboard';
 // Material UI themes
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
+    fontFamily: "'Krub', sans-serif"
   },
   palette: {
     primary: {

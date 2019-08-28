@@ -9,8 +9,8 @@ export const useStyles = makeStyles(theme => ({
     marginTop: 60
   },
   appBar: {
-    backgroundColor: 'white',
-    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: '#f3f3ef',
+    zIndex: theme.zIndex.drawer + 1
   },
   appBarShift: {
   },
@@ -20,7 +20,7 @@ export const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: '#7c8293'
     },
-    color: 'white'
+    color: '#f3f3ef'
   },
   menuCloseButton: {
     marginRight: 8,
@@ -36,7 +36,7 @@ export const useStyles = makeStyles(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   drawerOpen: {
     backgroundColor: '#9E9E9E',
@@ -66,18 +66,21 @@ export const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(3)
   },
   iconAlertBackground: {
     backgroundColor: '#454D66',
     '&:hover': {
       backgroundColor: '#7c8293'
-    },
+    }
   },
   iconAlertColor: {
-    color: '#EF6C6C',
+    color: '#EF6C6C'
   },
   iconBasicColor: {
     color: '#454D66'
   },
+  listTextFont: {
+    fontWeight: 500
+  }
 }));
