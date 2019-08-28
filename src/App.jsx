@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { GlobalStyles } from './GlobalStyles';
 
 // Components
-import { AppDrawer } from './components/AppDrawer';
+import { Dashboard } from './components/Dashboard';
 
 // Material UI themes
 const theme = createMuiTheme({
@@ -35,7 +35,7 @@ export const App = () => (
   <div>
     <GlobalStyles />
     <MuiThemeProvider theme={theme}>
-      <AppDrawer />
+      <Dashboard />
     </MuiThemeProvider>
   </div>
 );
