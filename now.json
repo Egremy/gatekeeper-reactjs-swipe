@@ -1,6 +1,7 @@
 {
     "version": 2,
     "name": "gatekeeper",
+    "alias": ["gatekeeper"],
     "builds": [
         {
             "use": "@now/static-build",
