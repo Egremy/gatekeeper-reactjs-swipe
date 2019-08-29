@@ -41,4 +41,98 @@ export const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     padding-bottom: 10px;
   }
+
+  .react-Slidy {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    background: #dcdcdc;
+    min-height: 50px;
+    position: relative;
+  }
+  .react-Slidy-prev, .react-Slidy-next {
+    align-items: center;
+    background: rgba(255, 255, 255, .8);
+    bottom: 0;
+    cursor: pointer;
+    display: flex;
+    height: 20%;
+    justify-content: center;
+    margin: auto 0;
+    min-height: 56px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: opacity 0.3s ease;
+    width: 40px;
+    z-index: 1;
+  }
+  @media screen and (max-width: 850px) {
+    .react-Slidy-prev, .react-Slidy-next {
+      display: none;
+    }
+  }
+  .react-Slidy-next {
+    border-radius: 10px 0 0 10px;
+    right: 0;
+  }
+  .react-Slidy-next::after {
+    margin-right: 6px;
+    transform: rotate(45deg);
+    border-right: 3px solid #aaa;
+    border-top: 3px solid #aaa;
+    content: '';
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+  }
+  .react-Slidy-prev {
+    border-radius: 0 10px 10px 0;
+    left: 0;
+  }
+  .react-Slidy-prev::after {
+    margin-left: 6px;
+    transform: rotate(-135deg);
+    border-right: 3px solid #aaa;
+    border-top: 3px solid #aaa;
+    content: '';
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+  }
+  .react-Slidy:hover > span {
+    opacity: 1;
+  }
+  .react-Slidy:hover > span[disabled] {
+    opacity: 0.2;
+  }
+  .react-Slidy > div {
+    font-size: 0;
+    max-height: 100%;
+    overflow: hidden;
+    position: relative;
+    transition: all 1s ease-in-out;
+    white-space: nowrap;
+    width: 100%;
+  }
+  .react-Slidy > div > ul {
+    display: block;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    will-change: transform, transition-timing, transition-duration;
+  }
+  .react-Slidy > div > ul > li {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    width: 100%;
+  }
+  .react-Slidy > div img {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    display: block;
+    height: auto;
+    pointer-events: none;
+    width: 100%;
+  }
 `;
