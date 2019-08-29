@@ -94,5 +94,22 @@ export const useStyles = makeStyles(theme => ({
   },
   listTextFont: {
     fontWeight: 500
-  }
+  },
+  mainContentRoot: {
+    flexGrow: 1,
+    padding: 16
+  },
+  frames: {
+    padding: 16,
+    textAlign: 'center',
+    height: '85vh',
+    backgroundColor: LIGHT_GRAY,
+    overflowY: 'auto'
+  },
+  tableContentRoot: {
+    width: '100%',
+    overflowX: 'auto',
+  },
+  table: {
+  },
 }));
