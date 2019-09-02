@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import ReactSlidy from 'react-slidy';
 
 // Components
-import { MapComponent } from './MapComponent';
+import { GatekeeperMapComponent } from './GatekeeperMapComponent';
 import { TableComponent } from './TableComponent';
 import { GraphComponent } from './GraphComponent';
 
 export const SwipeComponent = ({ classes }) => (
   <ReactSlidy>
-    <MapComponent
+    <GatekeeperMapComponent
       classes={classes}
     />
     <div className={classes.frames}>

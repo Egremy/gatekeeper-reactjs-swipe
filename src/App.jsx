@@ -10,6 +10,8 @@ import { GlobalStyles } from './GlobalStyles';
 // Components
 import { Dashboard } from './components/Dashboard';
 
+require('babel-polyfill');
+
 // Material UI themes
 const theme = createMuiTheme({
   typography: {
