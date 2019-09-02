@@ -1,5 +1,5 @@
 // Dependencies
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -24,7 +25,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 
 // Constants
-import { ListItem } from '@material-ui/core';
+
 import { GATEKEEPER_DRAWER_OPTIONS } from './constants';
 
 const myStyles = makeStyles(theme => ({
@@ -54,12 +55,6 @@ const myStyles = makeStyles(theme => ({
 
 export const LeftDrawer = ({ classes, open }) => {
   const myClasses = myStyles();
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  });
 
   const createTwidgetsFromData = (data) => {
     let twidgets = [...new Set(data.map(item => item.twidget))];
@@ -92,9 +87,39 @@ export const LeftDrawer = ({ classes, open }) => {
     return twidgets;
   };
 
-  const handleChange = name => event => {
-    setState({ ...state, [name]: event.target.checked });
+  const toogleCheckBox = (changedCheckBox, parent) => event => {
+    // setState({ ...state, [name]: event.target.checked });
+    changedCheckBox.checked = !changedCheckBox.checked;
+
+    if (changedCheckBox.items && changedCheckBox.items.length > 0) {
+      changedCheckBox.items.map(cb => (cb.checked = changedCheckBox.checked));
+      changedCheckBox.indeterminate = false;
+    }
+
+    if (parent != null) {
+      // check siblings
+      const siblings = parent.items.filter(
+        item => item.parent_id === changedCheckBox.parent_id,
+      );
+      if (siblings.every(item => item.checked === true)) {
+        parent.checked = true;
+        parent.indeterminate = false;
+      } else if (siblings.every(item => item.checked === false)) {
+        parent.checked = false;
+        parent.indeterminate = false;
+      } else {
+        parent.checked = true;
+        parent.indeterminate = true;
+      }
+    }
+
+    // Updating the state
+    const newtwidgetsData = [...twidgetsData];
+    setTwidgetsData(newtwidgetsData);
   };
+
+  // initial state
+  const [twidgetsData, setTwidgetsData] = React.useState(createTwidgetsFromData(GATEKEEPER_DRAWER_OPTIONS));
 
   return (
     <Drawer
@@ -113,10 +138,10 @@ export const LeftDrawer = ({ classes, open }) => {
     >
       <List>
         <Paper square>
-          <ListItem>
-            <ListItemText>FILTER</ListItemText>
+          <ListItem key="searchLabel">
+            <ListItemText classes={{ primary: myClasses.labelBold }}>FILTER</ListItemText>
           </ListItem>
-          <ListItem>
+          <ListItem key="searchBox">
             <ListItemText>
               <Paper square>
                 <InputBase
@@ -136,8 +161,8 @@ export const LeftDrawer = ({ classes, open }) => {
         </Paper>
       </List>
       <List disablePadding>
-        {createTwidgetsFromData(GATEKEEPER_DRAWER_OPTIONS).map((item) => (
-          <ExpansionPanel square>
+        {twidgetsData.map((item) => (
+          <ExpansionPanel key={item.id} square>
             <ExpansionPanelSummary
               classes={{
                 root: myClasses.expansionPanelSummary,
@@ -145,15 +170,14 @@ export const LeftDrawer = ({ classes, open }) => {
                 expanded: myClasses.expansionPanelSummary,
               }}
               expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1a-content"
-              id="panel1a-header"
+              aria-controls="panel-content"
             >
               <FormControlLabel
                 control={(
                   <Checkbox
                     checked={item.checked}
-                    onChange={handleChange(item)}
-                    value="checkedF"
+                    onChange={toogleCheckBox(item, null)}
+                    value={item.title}
                     indeterminate={item.indeterminate}
                   />
                 )}
@@ -164,12 +188,11 @@ export const LeftDrawer = ({ classes, open }) => {
             <ExpansionPanelDetails classes={{ root: myClasses.expansionPanelDetails }}>
               <List dense disablePadding>
                 {item.items.map((cb) => (
-                  <ListItem divider disableGutters>
+                  <ListItem key={cb.id} divider button disableGutters onClick={toogleCheckBox(cb, item)}>
                     <ListItemIcon classes={{ root: myClasses.listItemIcon }}>
                       <Checkbox
                         checked={cb.checked}
-                        onChange={handleChange(cb)}
-                        value="checkedF"
+                        value={cb.title}
                         indeterminate={cb.indeterminate}
                       />
                     </ListItemIcon>
@@ -187,8 +210,7 @@ export const LeftDrawer = ({ classes, open }) => {
               </List>
             </ExpansionPanelDetails>
           </ExpansionPanel>
-        )
-        )}
+        ))}
       </List>
     </Drawer>
   );
