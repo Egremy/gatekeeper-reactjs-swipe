@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -92,7 +92,8 @@ export const LeftDrawer = ({ classes, open }) => {
     changedCheckBox.checked = !changedCheckBox.checked;
 
     if (changedCheckBox.items && changedCheckBox.items.length > 0) {
-      changedCheckBox.items.map(cb => (cb.checked = changedCheckBox.checked));
+      // eslint-disable-next-line no-return-assign
+      changedCheckBox.items.map((cb) => (cb.checked = changedCheckBox.checked));
       changedCheckBox.indeterminate = false;
     }
 
