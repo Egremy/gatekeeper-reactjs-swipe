@@ -1,7 +1,6 @@
 // Dependencies
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 
 // Material-UI Core
 import Drawer from '@material-ui/core/Drawer';
@@ -53,7 +52,7 @@ const myStyles = makeStyles(theme => ({
   }
 }));
 
-export const LeftDrawer = ({ classes, open }) => {
+export const LeftDrawer = ({ classes }) => {
   const myClasses = myStyles();
 
   const createTwidgetsFromData = (data) => {
@@ -125,17 +124,10 @@ export const LeftDrawer = ({ classes, open }) => {
   return (
     <Drawer
       variant="permanent"
-      className={clsx(classes.drawer, {
-        [classes.drawerOpen]: open,
-        [classes.drawerClose]: !open,
-      })}
+      className={classes.drawer}
       classes={{
-        paper: clsx({
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })
+        paper: classes.drawerOpen,
       }}
-      open={open}
     >
       <List>
         <Paper square>
@@ -163,7 +155,7 @@ export const LeftDrawer = ({ classes, open }) => {
       </List>
       <List disablePadding>
         {twidgetsData.map((item) => (
-          <ExpansionPanel key={item.id} square>
+          <ExpansionPanel key={item.title} square>
             <ExpansionPanelSummary
               classes={{
                 root: myClasses.expansionPanelSummary,
@@ -219,5 +211,4 @@ export const LeftDrawer = ({ classes, open }) => {
 
 LeftDrawer.propTypes = {
   classes: PropTypes.objectOf(PropTypes.any),
-  open: PropTypes.bool,
 };
