@@ -127,12 +127,12 @@ export const GlobalStyles = createGlobalStyle`
     vertical-align: top;
     width: 100%;
   }
-  .react-Slidy > div img {
+  ${'' /* .react-Slidy > div img {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
     display: block;
     height: auto;
     pointer-events: none;
     width: 100%;
-  }
+  } */}
 `;
