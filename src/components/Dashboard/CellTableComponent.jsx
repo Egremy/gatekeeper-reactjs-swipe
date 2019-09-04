@@ -8,14 +8,13 @@ export default React.memo((props) => {
   } = props;
   const textDom = React.isValidElement(data) ? (data) : (
     <span>
-      {' '}
       { data.toString() }
-      {' '}
     </span>
   );
   const cellContainerStyles = {
     ...styles,
     ...borderStyle,
+    whiteSpace: 'normal'
   };
 
   if (width) {

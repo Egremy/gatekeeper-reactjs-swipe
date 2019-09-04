@@ -62,6 +62,7 @@ const tableStyles = {
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: '100',
+    // fontSize: 14,
     boxSizing: 'border-box',
     border: '1px solid #dee2e6',
     textAlign: 'center'
@@ -78,7 +79,8 @@ const tableStyles = {
     color: 'white',
     fontWeight: '100',
     overflow: 'hidden',
-    height: 40
+    height: 40,
+    // fontSize: 12
   },
   oddRow: {
     backgroundColor: '#F7F6E7'

@@ -2,11 +2,11 @@ import React from 'react';
 import { FixedSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import PropTypes from 'prop-types';
+import styled, { keyframes } from 'styled-components';
 import ApolloService from './services/apolloServices';
 import RowTableComponent from './RowTableComponent';
 import { GatekeeperTableDropdown } from './GatekeeperTableDropdown';
 import loadingImg from '../../static/assets/loading.svg';
-// import './styles.css';
 
 const elementResizeDetectorMaker = require('element-resize-detector');
 
@@ -241,11 +241,12 @@ export class GatekeeperTableComponent extends React.Component {
               width: this.sizeTableContainer.width
             }}
           >
-            <img
-              src={loadingImg}
-              alt="Select columns to see"
-              style={{ animation: 'animationSpinner infinite 0.5s linear' }}
-            />
+            <Rotate>
+              <img
+                src={loadingImg}
+                alt="Select columns to see"
+              />
+            </Rotate>
           </div>
         );
       }
@@ -322,6 +323,20 @@ export class GatekeeperTableComponent extends React.Component {
     );
   }
 }
+
+// Create the keyframes
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+// Here we create a component that will rotate everything we pass
+const Rotate = styled.div`
+  animation: ${rotate} 0.5s linear infinite;
+`;
 
 const componentStyles = {
   tableOptions: {

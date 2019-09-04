@@ -97,14 +97,16 @@ export const useStyles = makeStyles(theme => ({
   },
   mainContentRoot: {
     flexGrow: 1,
-    padding: 16
+    padding: 16,
+    width: 'calc(100% - 73px)'
   },
   frames: {
     padding: 16,
-    textAlign: 'center',
+    // textAlign: 'center',
     height: '85vh',
     backgroundColor: LIGHT_GRAY,
-    overflowY: 'auto'
+    overflowY: 'auto',
+    // width: '100vw'
   },
   tableContentRoot: {
     width: '100%',
