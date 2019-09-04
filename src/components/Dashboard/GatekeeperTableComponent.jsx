@@ -1,65 +1,67 @@
-// Dependencies
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import elementResizeDetectorMaker from 'element-resize-detector';
-import InfiniteLoader from 'react-window-infinite-loader';
+import React from 'react';
 import { FixedSizeList as List } from 'react-window';
-
-// Material-UI Core
-// import CircularProgress from '@material-ui/core/CircularProgress';
-
-// Apollo
+import InfiniteLoader from 'react-window-infinite-loader';
+import PropTypes from 'prop-types';
 import ApolloService from './services/apolloServices';
-
-// Components
 import RowTableComponent from './RowTableComponent';
 import { GatekeeperTableDropdown } from './GatekeeperTableDropdown';
-
-// Assets
 import loadingImg from '../../static/assets/loading.svg';
 // import './styles.css';
 
-export class GatekeeperTableComponent extends Component {
+const elementResizeDetectorMaker = require('element-resize-detector');
+
+export class GatekeeperTableComponent extends React.Component {
   constructor(props) {
     super(props);
-    const { url } = this.props;
-    this.apolloService = new ApolloService(url);
+
+    this.apolloService = new ApolloService(props.url);
+
     // Hold the table query
     this.dataQuery = '';
+
     // Table data
     this.tableData = [];
+
     // Column widths
     this.widthArr = [];
+
     // Size of table container
     this.sizeTableContainer = { width: 0, height: 0 };
 
     this.state = {
       // Indicates if the columns are selected
       selectedColumns: [],
+
       // Name of the selected columns
       selectedColumnNames: [],
+
       // Width of the selected columns
       selectedWidthArr: [],
+
       // Table data of the selected columns
       selectedTableData: [],
+
       // Indicates if there was an error with something
       thereWasAnError: false,
+
       // Real table width (Sum of the width of the columns)
       columnsWidth: 0,
+
       // Table height
       tableHeight: 0,
+
       // Indicates if there is more data to load
       hasNextPage: true, // eslint-disable-line
+
       // Indicates if the next page is loading
       isNextPageLoading: false
     };
   }
 
   componentDidMount() {
-    const { pageSize } = this.props;
-    const { selectedWidthArr } = this.state;
     // Indicates the number of rows that have to be visibles to load more data
-    this.threshold = (pageSize / 2) > 50 ? 50 : pageSize / 2;
+    this.threshold = (this.props.pageSize / 2) > 50 ? 50 : this.props.pageSize / 2;
+
     // Listen When the table container resize to resize the table too.
     this.erd = elementResizeDetectorMaker({
       strategy: 'scroll'
@@ -69,8 +71,7 @@ export class GatekeeperTableComponent extends Component {
       element => {
         this.sizeTableContainer = { width: element.offsetWidth, height: element.offsetHeight };
         this.setState({
-          columnsWidth: selectedWidthArr.reduce((acc, n) => acc + n, 0),
-          tableHeight: element.offsetHeight
+          columnsWidth: this.state.selectedWidthArr.reduce((acc, n) => acc + n, 0), tableHeight: element.offsetHeight // eslint-disable-line
         });
       }
     );
@@ -87,23 +88,21 @@ export class GatekeeperTableComponent extends Component {
     let strCols = '';
     for (let i = 0; i < columnsInfo.length; i += 1) {
       const colsWithSameName = columnsInfo.filter(colInfo => colInfo.name === columnsInfo[i].name);
-      if (colsWithSameName.length === 1) {
-        strCols += `${columnsInfo[i].name} `;
-      } else {
+      if (colsWithSameName.length === 1) { strCols += `${columnsInfo[i].name} `; } else {
         strCols += `${columnsInfo[i].table}_${columnsInfo[i].name} `;
       }
     }
+
     return strCols.trim();
   }
 
   loadNextPage() {
-    const { renderData, queryName } = this.props;
-    const { selectedTableData } = this.state;
     console.log('>>> LOAD MORE DATA...'); // eslint-disable-line
     this.setState({ isNextPageLoading: true });
+
     this.waitForColumnsInfo()
       .then(
-        () => this.apolloService.query(this.dataQuery.replace('%dfrom', selectedTableData.length)),
+        () => this.apolloService.query(this.dataQuery.replace('%dfrom', this.state.selectedTableData.length)),
         error => {
           this.setState({ thereWasAnError: true });
           console.log('>>>>>>>>>>>>>>>>>>>'); // eslint-disable-line
@@ -112,8 +111,8 @@ export class GatekeeperTableComponent extends Component {
         }
       ).then(
         gqlData => {
-          const renderFn = renderData ? renderData : this.renderData; // eslint-disable-line
-          const { tableData } = renderFn(gqlData, queryName, selectedTableData.length);
+          const renderFn = this.props.renderData ? this.props.renderData : this.renderData;
+          const { tableData } = renderFn(gqlData, this.props.queryName, this.state.selectedTableData.length);
           this.tableData = [...this.tableData, ...tableData];
 
           // Filter columns not visibles of the new data chunk
@@ -127,7 +126,7 @@ export class GatekeeperTableComponent extends Component {
 
           this.setState({
             isNextPageLoading: false,
-            selectedTableData: [...selectedTableData, ...dataChunkFiltered]
+            selectedTableData: [...this.state.selectedTableData, ...dataChunkFiltered] // eslint-disable-line
           });
         },
         error => {
@@ -140,9 +139,7 @@ export class GatekeeperTableComponent extends Component {
   }
 
   waitForColumnsInfo() {
-    if (this.dataQuery) {
-      return Promise.resolve();
-    }
+    if (this.dataQuery) { return Promise.resolve(); }
 
     const columnNamesQuery = `{
         tableStructQuery {
@@ -213,6 +210,7 @@ export class GatekeeperTableComponent extends Component {
         rowData: Object.values(alert)
       })
     );
+
     return {
       tableData: rowsInfo
     };
@@ -220,16 +218,16 @@ export class GatekeeperTableComponent extends Component {
 
   render() {
     const { styles, pageSize } = this.props;
-    const {
-      selectedTableData, isNextPageLoading, columnsWidth, selectedWidthArr, thereWasAnError,
-      selectedColumns, selectedColumnNames, tableHeight
-    } = this.state;
+
     // If there are more items to be loaded then add an extra row to hold a loading indicator.
-    const itemCount = selectedTableData.length + 1;
+    const itemCount = this.state.selectedTableData.length + 1;
+
     // Only load 1 page of items at a time.
-    const loadMoreItems = isNextPageLoading ? () => {} : this.loadNextPage.bind(this);
+    const loadMoreItems = this.state.isNextPageLoading ? () => {} : this.loadNextPage.bind(this);
+
     // Every row is loaded except for our loading indicator row.
-    const isItemLoaded = index => index < selectedTableData.length;
+    const isItemLoaded = index => index < this.state.selectedTableData.length;
+
     // Render an item or a loading indicator.
     const Item = ({ index, style }) => {
       if (!isItemLoaded(index)) {
@@ -243,16 +241,15 @@ export class GatekeeperTableComponent extends Component {
               width: this.sizeTableContainer.width
             }}
           >
-            {/* <CircularProgress /> */}
             <img
               src={loadingImg}
               alt="Select columns to see"
-              // style={{ animation: 'animationSpinner infinite 0.5s linear' }}
+              style={{ animation: 'animationSpinner infinite 0.5s linear' }}
             />
           </div>
         );
       }
-      const rowInfo = selectedTableData[index];
+      const rowInfo = this.state.selectedTableData[index];
       const rowStyles = styles.row;
 
       return (
@@ -260,40 +257,38 @@ export class GatekeeperTableComponent extends Component {
           <RowTableComponent
             key={Number(index)}
             data={rowInfo.rowData}
-            width={columnsWidth}
-            widthArr={selectedWidthArr}
+            width={this.state.columnsWidth}
+            widthArr={this.state.selectedWidthArr}
             styles={rowStyles}
             bgColor={rowInfo.bgColor}
             cellStyles={styles.cellRow}
-            borderStyle={styles.border}
+            borderStyle={this.props.styles.border}
           />
         </div>
       );
     };
 
-    if (!thereWasAnError) {
+    if (!this.state.thereWasAnError) {
       return (
         <div style={componentStyles.tableContainer}>
           {/* Table options */}
           <div style={{ ...componentStyles.tableOptions, ...styles.header }}>
             <div style={{ paddingRight: 10, paddingLeft: 10, position: 'relative' }}>
               <GatekeeperTableDropdown
-                columns={selectedColumns}
+                columns={this.state.selectedColumns}
                 onChange={newValColumns => this.updateSelectedColumns(newValColumns)}
               />
             </div>
           </div>
-
           <div style={componentStyles.tableMovContent}>
             <RowTableComponent
-              data={selectedColumnNames}
-              width={columnsWidth}
-              widthArr={selectedWidthArr}
+              data={this.state.selectedColumnNames}
+              width={this.state.columnsWidth}
+              widthArr={this.state.selectedWidthArr}
               styles={styles.header}
               cellStyles={styles.cellHeader} // eslint-disable-line
               borderStyle={styles.borderStyles} // eslint-disable-line
             />
-
             <InfiniteLoader
               isItemLoaded={isItemLoaded}
               itemCount={itemCount}
@@ -301,15 +296,15 @@ export class GatekeeperTableComponent extends Component {
               minimumBatchSize={pageSize}
               threshold={this.threshold}
             >
-
               {({ onItemsRendered, ref }) => (
                 <List
-                  height={tableHeight}
+                  style={{ overflowX: 'hidden' }}
+                  height={this.state.tableHeight}
                   itemCount={itemCount}
-                  itemSize={styles.row.height}
+                  itemSize={this.props.styles.row.height}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
-                  width={columnsWidth}
+                  width={this.state.columnsWidth}
                 >
                   { Item }
                 </List>
@@ -372,20 +367,24 @@ GatekeeperTableComponent.propTypes = {
    * Graphql server url
    */
   url: PropTypes.string.isRequired,
+
   /**
    * Graphql query name
    */
   queryName: PropTypes.string,
+
   /**
    * Function that build the table.
    * Note: The return of this function will be: { tableData: { bgColor: string, rowData: any[] }[] }
    * that holds the table body data.
    */
   renderData: PropTypes.func,
+
   /**
    * Number of rows that fetch from the graphql server
    */
   pageSize: PropTypes.number.isRequired,
+
   /**
    * Table styles
    */

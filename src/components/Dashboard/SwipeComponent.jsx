@@ -18,7 +18,15 @@ export const SwipeComponent = ({ classes }) => (
       classes={classes}
     />
     <div className={classes.frames}>
-      <div className="App-table-container" id="App-table-container">
+      <div
+        className="App-table-container"
+        style={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#dfe6e9'
+        }}
+        id="App-table-container"
+      >
         <GatekeeperTableComponent
           url={gqlConfig.url}
           queryName={gqlConfig.queryName}
