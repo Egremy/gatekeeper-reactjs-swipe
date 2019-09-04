@@ -1,6 +1,5 @@
 // Dependencies
 import React from 'react';
-import clsx from 'clsx';
 
 // Material-UI Core
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +15,6 @@ import { useStyles } from './styles';
 
 export const Dashboard = () => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
 
   return (
     <div className={classes.root}>
@@ -24,19 +22,14 @@ export const Dashboard = () => {
       <AppBar
         color="primary"
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
+        className={classes.appBar}
       >
         <TopNavigator
           classes={classes}
-          open={open}
-          setOpen={setOpen}
         />
       </AppBar>
       <LeftDrawer
         classes={classes}
-        open={open}
       />
       <MainContent
         classes={classes}
