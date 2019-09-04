@@ -94,5 +94,8 @@ export const useStyles = makeStyles(theme => ({
   },
   listTextFont: {
     fontWeight: 500
+  },
+  input: {
+    padding: '4px 8px'
   }
 }));

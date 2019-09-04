@@ -40,15 +40,16 @@ const myStyles = makeStyles(theme => ({
   },
   expansionPanelDetails: {
     display: 'block',
-    paddingTop: 0,
-    paddingBottom: 0,
-    paddingLeft: 12,
+    padding: '0 8px'
   },
   listItemIcon: {
     minWidth: 0,
   },
   labelBold: {
     fontWeight: 'bold',
+  },
+  rightNumber: {
+    padding: '0 8px'
   }
 }));
 
@@ -190,7 +191,7 @@ export const LeftDrawer = ({ classes }) => {
                       />
                     </ListItemIcon>
                     <ListItemText primary={cb.title} />
-                    <Typography>{cb.count}</Typography>
+                    <Typography className={myClasses.rightNumber}>{cb.count}</Typography>
                     {cb.items.length > 0 ? (
                       <ListItemSecondaryAction>
                         <IconButton edge="end" aria-label="comments">
