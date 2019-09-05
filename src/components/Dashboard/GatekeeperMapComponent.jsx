@@ -71,8 +71,8 @@ export const GatekeeperMapComponent = ({ center, zoom }) => {
       icon: {
         uri: imgUrl,
       },
-      iconWidth: 30,
-      iconHeight: 30,
+      iconWidth: 35,
+      iconHeight: 35,
       clusterType: index,
       id: idx,
     };
