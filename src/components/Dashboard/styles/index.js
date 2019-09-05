@@ -98,7 +98,7 @@ export const useStyles = makeStyles(theme => ({
   mainContentRoot: {
     flexGrow: 1,
     padding: 16,
-    width: 'calc(100% - 73px)'
+    width: 'calc(100% - 320px)'
   },
   frames: {
     padding: 16,

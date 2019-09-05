@@ -110,7 +110,7 @@ export const GlobalStyles = createGlobalStyle`
     max-height: 100%;
     overflow: hidden;
     position: relative;
-    // transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
     white-space: nowrap;
     width: 100%;
   }
