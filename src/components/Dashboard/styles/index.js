@@ -114,4 +114,7 @@ export const useStyles = makeStyles(theme => ({
   },
   table: {
   },
+  input: {
+    padding: '4px 8px'
+  }
 }));
