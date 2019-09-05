@@ -106,7 +106,7 @@ export const GlobalStyles = createGlobalStyle`
     opacity: 0.2;
   }
   .react-Slidy > div {
-    font-size: 0;
+    // font-size: 0;
     max-height: 100%;
     overflow: hidden;
     position: relative;
@@ -127,12 +127,4 @@ export const GlobalStyles = createGlobalStyle`
     vertical-align: top;
     width: 100%;
   }
-  ${'' /* .react-Slidy > div img {
-    -webkit-backface-visibility: hidden;
-    -webkit-perspective: 1000;
-    display: block;
-    height: auto;
-    pointer-events: none;
-    width: 100%;
-  } */}
 `;

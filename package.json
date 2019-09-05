@@ -48,12 +48,19 @@
     "dependencies": {
         "@material-ui/core": "4.3.3",
         "@material-ui/icons": "4.2.1",
+        "apollo-boost": "^0.4.4",
         "babel-polyfill": "6.26.0",
         "clustered-react-gmap": "git+https://github.com/pibemx/clustered-react-gmap.git",
+        "element-resize-detector": "^1.1.15",
+        "graphql": "^14.4.2",
         "prop-types": "15.7.2",
         "react": "16.9.0",
+        "react-apollo": "^3.0.1",
         "react-dom": "16.9.0",
+        "react-scripts": "3.1.1",
         "react-slidy": "4.0.13",
+        "react-window": "^1.8.5",
+        "react-window-infinite-loader": "^1.0.3",
         "styled-components": "4.3.2"
     },
     "eslintConfig": {
@@ -101,7 +108,8 @@
             "no-use-before-define": "off",
             "react/destructuring-assignment": "off",
             "react/require-default-props": "off",
-            "react/jsx-filename-extension": "off"
+            "react/jsx-filename-extension": "off",
+            "class-methods-use-this": "off"
         }
     }
 }

@@ -102,3 +102,8 @@ export const COLOR_STYLE_GUIDE = {
   TWILIGHT_BLUE: '#094a74',
   WARM_GRAY: '#9e9e9e'
 };
+
+export const gqlConfig = {
+  url: 'http://35.239.33.45:8080/query',
+  queryName: 'tableQueryv2'
+};
