@@ -19,6 +19,7 @@ export const TopNavigator = ({
   classes
 }) => {
   const [value, setValue] = React.useState(0);
+  const views = ['Athena', 'Cart Analytics', 'Wheels', 'Wheel Events', 'System Health', 'Dashboard'];
 
   function handleChange(event, newValue) {
     setValue(newValue);
@@ -39,7 +40,7 @@ export const TopNavigator = ({
         <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
             Core
         </Link>
-        <Typography color="textPrimary">Breadcrumb</Typography>
+        <Typography color="textPrimary">{ views[value] }</Typography>
       </Breadcrumbs>
       <Tabs
         value={value}
